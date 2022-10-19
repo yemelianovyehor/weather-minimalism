@@ -2,8 +2,21 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
+import { pathsToModuleNameMapper } from "ts-jest";
+import * as tsconfig from "./tsconfig.json";
+import type { JestConfigWithTsJest } from "ts-jest";
 
-export default {
+const tsconfigPaths = pathsToModuleNameMapper(tsconfig.compilerOptions.paths, {
+	prefix: "<rootDir>",
+});
+
+const mocks: { [key: string]: string | string[] } = {
+	"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+		"<rootDir>/__mocks__/fileMock.js",
+	"\\.(css|less)$": "identity-obj-proxy",
+};
+
+const jestConfig: JestConfigWithTsJest = {
 	// All imported modules in your tests should be mocked automatically
 	// automock: false,
 
@@ -88,7 +101,10 @@ export default {
 	],
 
 	// A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-	// moduleNameMapper: {},
+	moduleNameMapper: {
+		...tsconfigPaths,
+		...mocks,
+	},
 
 	// An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
 	// modulePathIgnorePatterns: [],
@@ -193,3 +209,5 @@ export default {
 	// Whether to use watchman for file crawling
 	// watchman: true,
 };
+
+export default jestConfig;
