@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
 	return (
-		<footer>By Yehor Yemelianov</footer>
+		<footer><small>By Yehor Yemelianov</small></footer>
 	 );
 }
  

@@ -1,18 +1,24 @@
-import * as React from 'react';
+import * as React from "react";
+import "./WeatherBlock.css"
 
 interface WeatherBlockProps {
-	title:string
+	title: string;
 }
- 
-interface WeatherBlockState {
-	
-}
- 
-class WeatherBlock extends React.Component<WeatherBlockProps, WeatherBlockState> {
+
+interface WeatherBlockState {}
+
+class WeatherBlock extends React.Component<
+	WeatherBlockProps,
+	WeatherBlockState
+> {
 	// state = { :  }
-	render() { 
-		return ( <h3>{this.props.title}</h3> );
+	render() {
+		return (
+			<div className="weather-block">
+				<h3>{this.props.title}</h3>
+			</div>
+		);
 	}
 }
- 
+
 export default WeatherBlock;
