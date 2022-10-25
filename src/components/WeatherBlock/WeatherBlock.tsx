@@ -3,6 +3,7 @@ import "./WeatherBlock.css"
 
 interface WeatherBlockProps {
 	title: string;
+	data: string;
 }
 
 interface WeatherBlockState {}
@@ -16,6 +17,7 @@ class WeatherBlock extends React.Component<
 		return (
 			<div className="weather-block">
 				<h3>{this.props.title}</h3>
+				<br/>{this.props.data}
 			</div>
 		);
 	}

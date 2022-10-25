@@ -1,16 +1,22 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Main from "./Main";
+// import axios from "axios";
+// import data from "__mocks__/Weatherdata.json";
+
+// jest.mock("axios");
+// const mockedAxios = jest.mocked(axios, { shallow: false });
+// mockedAxios.get.mockResolvedValue(data);
 
 describe("Main", () => {
 	test("Main renders", () => {
-		render(<Main />);
+		act(() => {render(<Main />)});
 	});
 });
 
 describe("Weather Blocks", () => {
-	test("plc", () => {
+	test("render", () => {
 		const MainElement = render(<Main />);
 		expect(screen.getByText("Weather Code")).toBeVisible();
 		expect(screen.getByText("Temperature")).toBeVisible();

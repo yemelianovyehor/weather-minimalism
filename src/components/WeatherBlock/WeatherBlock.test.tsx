@@ -6,7 +6,9 @@ import WeatherBlock from "./WeatherBlock";
 describe('Weather Block', () => { 
 	test('render title', () => {
 		const title = "Quackidy quack";
-		render(<WeatherBlock title={title}/>)
+		const data = "somedata"
+		render(<WeatherBlock title={title} data={data}/>)
 		expect(screen.getByText(title)).toBeVisible();
+		expect(screen.getByText(data)).toBeVisible();
 	});
  })
