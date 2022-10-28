@@ -2,7 +2,7 @@ import WeatherBlock from "@components/WeatherBlock/WeatherBlock";
 import Row from "@components/Row/Row";
 import * as React from "react";
 import ApiAnswer from "../../types/ApiAnswer";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 // import * as data from '__mocks__/Weatherdata.json';
 
 function WeatherInfo() {
@@ -10,7 +10,7 @@ function WeatherInfo() {
 		false
 	);
 	const [isLoading, setLoading] = React.useState(true);
-	const [isError, setError] = React.useState(false);
+	const [isError, setError] = React.useState<AxiosError|false>(false);
 
 	React.useState(() => {
 		axios
@@ -22,7 +22,11 @@ function WeatherInfo() {
 				setWeatherData(res.data);
 				setLoading(false);
 			})
-			.catch((e) => setError(e));
+			.catch((e) => {
+				setError(e);
+				setLoading(false);
+				console.log(e.message);
+			});
 	});
 
 	let data, units;

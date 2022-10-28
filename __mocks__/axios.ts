@@ -9,5 +9,5 @@ const mockedResp = {
 };
 
 export default {
-	get: jest.fn(() => Promise.resolve())
+	get: jest.fn(() => Promise.resolve(mockedResp))
 }

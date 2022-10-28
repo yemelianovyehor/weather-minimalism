@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import WeatherInfo from "@components/WeatherInfo/WeatherInfo";
 import { act } from "react-dom/test-utils";
@@ -9,7 +9,14 @@ describe("WeatherInfo", () => {
 		act(() => {
 			render(<WeatherInfo />);
 		});
-		const temp = new RegExp("Temperature.*((-|)d+)/((-|)d+..)", "s");
-		expect(await screen.findByText(temp)).toBeInTheDocument();
+		// prettier-ignore
+		const tempRegExp = new RegExp("((-|)\\d+ - (-|)\\d+..)");
+		screen.debug();
+
+		let tempNode: HTMLElement;
+		await waitFor(() => {
+			tempNode = screen.getByText("Temperature");
+		});
+		expect(tempNode!.nextSibling).toHaveTextContent(tempRegExp);
 	});
 });
