@@ -17,6 +17,6 @@ describe("WeatherInfo", () => {
 		await waitFor(() => {
 			tempNode = screen.getByText("Temperature");
 		});
-		expect(tempNode!.nextSibling).toHaveTextContent(tempRegExp);
+		expect(tempNode!.nextSibling?.nextSibling).toHaveTextContent(tempRegExp);
 	});
 });

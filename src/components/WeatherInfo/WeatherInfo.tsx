@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import WMO from "./WMOTranslator";
 // import * as data from '__mocks__/Weatherdata.json';
 import PrecipitationConverter from "./PrecipitationHelper";
+import WindInfo from "@components/WindInfo/WindInfo";
 
 function WeatherInfo() {
 	const [WeatherData, setWeatherData] = React.useState<ApiAnswer | false>(
@@ -18,8 +19,8 @@ function WeatherInfo() {
 		const today = new Date().toISOString().split("T")[0];
 		axios
 			.get(
-				// `https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=${today}&end_date=${today}`,
-				`https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=2022-11-05&end_date=2022-11-05`,
+				`https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=${today}&end_date=${today}`,
+				// `https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=2022-11-05&end_date=2022-11-05`,
 				{ timeout: 1000 }
 			)
 			.then((res) => {
@@ -33,8 +34,9 @@ function WeatherInfo() {
 			});
 	});
 
-	let data: ApiAnswer["daily"], units;
+	let data: ApiAnswer["daily"], units:ApiAnswer["daily_units"];
 	let Pdata: string, Pextra: string;
+	let WindBlock: React.ReactElement;
 	if (WeatherData) {
 		data = WeatherData.daily;
 		units = WeatherData.daily_units;
@@ -43,6 +45,15 @@ function WeatherInfo() {
 			showers: { amount: data.showers_sum[0], units: units.showers_sum },
 			snowfalls: { amount: data.snowfall_sum[0], units: units.snowfall_sum },
 		});
+		/* WindBlock = (
+			<WindInfo
+				winddirection={data.winddirection_10m_dominant[0]}
+				windspeed={data.windspeed_10m_max[0]}
+				windgust={data.windgusts_10m_max[0]}
+				windgust_units={units.windgusts_10m_max}
+				windspeed_units={units.windspeed_10m_max}
+			/> 
+		);*/
 	}
 
 	return isLoading ? (
@@ -61,7 +72,7 @@ function WeatherInfo() {
 						data!.apparent_temperature_min +
 						" - " +
 						data!.temperature_2m_max +
-						units?.temperature_2m_max
+						units!.temperature_2m_max
 					}
 				/>
 				<WeatherBlock
@@ -75,7 +86,18 @@ function WeatherInfo() {
 			</Row>
 			<Row>
 				<WeatherBlock title="Precipitation" data={Pdata!} extra={Pextra!} />
-				<WeatherBlock title="Wind" data="placeholder" />
+				<WeatherBlock
+					title="Wind"
+					data={
+						<WindInfo
+							winddirection={data!.winddirection_10m_dominant[0]}
+							windspeed={data!.windspeed_10m_max[0]}
+							windgust={data!.windgusts_10m_max[0]}
+							windgust_units={units!.windgusts_10m_max}
+							windspeed_units={units!.windspeed_10m_max}
+						/>
+					}
+				/>
 			</Row>
 		</div>
 	);

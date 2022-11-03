@@ -9,6 +9,6 @@ describe("Header", () => {
 	});
 	test("contain text", () => {
 		render(<Header/>)
-		expect(screen.getByText(`Weather`)).toBeInTheDocument();
+		expect(screen.getByText(`Weather in Poznań`)).toBeInTheDocument();
 	});
 });

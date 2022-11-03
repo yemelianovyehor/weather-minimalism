@@ -4,7 +4,7 @@ import "./WeatherBlock.css"
 interface WeatherBlockProps {
 	title: string;
 	extra? : string;
-	data: string;
+	data: string|React.ReactElement;
 }
 
 interface WeatherBlockState {}
@@ -18,7 +18,7 @@ class WeatherBlock extends React.Component<
 		return (
 			<div className="weather-block">
 				<h3>{this.props.title}</h3>
-				{this.props.extra}
+				<div>{this.props.extra}</div>
 				<span>{this.props.data}</span>
 			</div>
 		);
