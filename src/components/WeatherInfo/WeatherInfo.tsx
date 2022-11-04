@@ -53,7 +53,7 @@ function WeatherInfo() {
 					{WMO[data!.weathercode[0]]}
 				</WeatherBlock>
 			</Row>
-			<Row>
+			<Row style={{ height: "80px" } as React.CSSProperties}>
 				<WeatherBlock title="Temperature">
 					<>
 						{data!.apparent_temperature_min +
@@ -70,7 +70,7 @@ function WeatherInfo() {
 					</>
 				</WeatherBlock>
 			</Row>
-			<Row style={{ height: "135px" } as React.CSSProperties}>
+			<Row style={{ height: "110px" } as React.CSSProperties}>
 				<WeatherBlock title="Precipitation">
 					<PrecipitationInfo
 						data={{
