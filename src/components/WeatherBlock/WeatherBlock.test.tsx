@@ -7,7 +7,7 @@ describe('Weather Block', () => {
 	test('render title', () => {
 		const title = "Quackidy quack";
 		const data = "somedata"
-		render(<WeatherBlock title={title} data={data}/>)
+		render(<WeatherBlock title={title}>{data}</WeatherBlock>)
 		expect(screen.getByText(title)).toBeVisible();
 		expect(screen.getByText(data)).toBeVisible();
 	});

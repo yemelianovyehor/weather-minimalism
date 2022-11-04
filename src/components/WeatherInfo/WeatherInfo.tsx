@@ -1,6 +1,6 @@
+import React from "react";
 import WeatherBlock from "@components/WeatherBlock/WeatherBlock";
 import Row from "@components/Row/Row";
-import React from "react";
 import ApiAnswer from "../../types/ApiAnswer";
 import axios, { AxiosError } from "axios";
 import WMO from "./WMOTranslator";
@@ -55,15 +55,19 @@ function WeatherInfo() {
 			</Row>
 			<Row>
 				<WeatherBlock title="Temperature">
-					{data!.apparent_temperature_min +
-						" - " +
-						data!.temperature_2m_max +
-						units!.temperature_2m_max}
+					<>
+						{data!.apparent_temperature_min +
+							" - " +
+							data!.temperature_2m_max +
+							units!.temperature_2m_max}
+					</>
 				</WeatherBlock>
 				<WeatherBlock title="Sunrise and sunset">
-					{data!.sunrise[0].split("T").pop() +
-						" - " +
-						data!.sunset[0].split("T").pop()}
+					<>
+						{data!.sunrise[0].split("T").pop() +
+							" - " +
+							data!.sunset[0].split("T").pop()}
+					</>
 				</WeatherBlock>
 			</Row>
 			<Row style={{ height: "135px" } as React.CSSProperties}>
