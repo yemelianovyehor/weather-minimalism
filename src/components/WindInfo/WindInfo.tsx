@@ -16,6 +16,7 @@ class WindInfo extends React.Component<WindInfoProps, WindInfoState> {
 		const rotation : React.CSSProperties  = {
 			transform: `rotate(${this.props.winddirection}deg)`,
 			userSelect: "none",
+			zIndex:-1
 		};
 		return (
 			<div className="wind-info">

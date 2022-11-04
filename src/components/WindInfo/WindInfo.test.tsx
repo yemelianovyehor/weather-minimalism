@@ -1,1 +1,0 @@
-import WindInfo from "./WindInfo";

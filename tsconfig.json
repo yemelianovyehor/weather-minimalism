@@ -17,8 +17,7 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
-			"@components/*":["src/components/*"]
-		}
+			"@components/*":["src/components/*"]		}
 	},
 	"include": ["src","jest-setup.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
