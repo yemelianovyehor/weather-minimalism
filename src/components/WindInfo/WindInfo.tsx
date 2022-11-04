@@ -1,5 +1,4 @@
 import React from "react";
-import "./WindInfo.css";
 
 interface WindInfoProps {
 	windspeed: number;

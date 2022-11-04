@@ -7,6 +7,7 @@ import WMO from "./WMOTranslator";
 // import * as data from '__mocks__/Weatherdata.json';
 import PrecipitationConverter from "./PrecipitationHelper";
 import WindInfo from "@components/WindInfo/WindInfo";
+import "./WeatherInfo.css"
 
 function WeatherInfo() {
 	const [WeatherData, setWeatherData] = React.useState<ApiAnswer | false>(
@@ -34,7 +35,7 @@ function WeatherInfo() {
 			});
 	});
 
-	let data: ApiAnswer["daily"], units:ApiAnswer["daily_units"];
+	let data: ApiAnswer["daily"], units: ApiAnswer["daily_units"];
 	let Pdata: string, Pextra: string;
 	let WindBlock: React.ReactElement;
 	if (WeatherData) {
@@ -45,15 +46,6 @@ function WeatherInfo() {
 			showers: { amount: data.showers_sum[0], units: units.showers_sum },
 			snowfalls: { amount: data.snowfall_sum[0], units: units.snowfall_sum },
 		});
-		/* WindBlock = (
-			<WindInfo
-				winddirection={data.winddirection_10m_dominant[0]}
-				windspeed={data.windspeed_10m_max[0]}
-				windgust={data.windgusts_10m_max[0]}
-				windgust_units={units.windgusts_10m_max}
-				windspeed_units={units.windspeed_10m_max}
-			/> 
-		);*/
 	}
 
 	return isLoading ? (
@@ -62,6 +54,7 @@ function WeatherInfo() {
 		<h2>Sorry, an error occured</h2>
 	) : (
 		<div className="weather-info">
+			<small>{new Date().toISOString().split("T")[0]}</small>
 			<Row>
 				<WeatherBlock title="Weather Code" data={WMO[data!.weathercode[0]]} />
 			</Row>
@@ -84,8 +77,9 @@ function WeatherInfo() {
 					}
 				/>
 			</Row>
-			<Row>
-				<WeatherBlock title="Precipitation" data={Pdata!} extra={Pextra!} />
+			<Row style={{height:"150px"} as React.CSSProperties}>
+				{/* change for child = PrecipitationElement */}
+				<WeatherBlock title="Precipitation" data={Pdata!} extra={Pextra!} /> 
 				<WeatherBlock
 					title="Wind"
 					data={
