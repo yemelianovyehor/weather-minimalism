@@ -27,7 +27,7 @@ class WindInfo extends React.Component<WindInfoProps, WindInfoState> {
 					Gusts: {this.props.windgust} {this.props.windgust_units}
 				</div>
 				<div className="wind-direction" style={rotation}>
-					🡹
+					↑
 				</div>
 			</div>
 		);

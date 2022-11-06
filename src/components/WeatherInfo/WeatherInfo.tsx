@@ -22,7 +22,7 @@ function WeatherInfo() {
 			.get(
 				`https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=${today}&end_date=${today}`,
 				// `https://api.open-meteo.com/v1/forecast?latitude=52.4095&longitude=16.9319&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=2022-11-05&end_date=2022-11-05`,
-				{ timeout: 1000 }
+				{ timeout: 3000 }
 			)
 			.then((res) => {
 				setWeatherData(res.data);
@@ -42,7 +42,8 @@ function WeatherInfo() {
 	}
 
 	return isLoading ? (
-		<h2>Loading</h2>
+		// <h2>Loading</h2>
+		<div className="lds-dual-ring"></div>
 	) : isError ? (
 		<h2>Sorry, an error occured</h2>
 	) : (
