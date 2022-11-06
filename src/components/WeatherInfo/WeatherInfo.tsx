@@ -50,7 +50,7 @@ function WeatherInfo() {
 		<div className="weather-info">
 			<small>{new Date().toISOString().split("T")[0]}</small>
 			<Row>
-				<WeatherBlock title="Weather Code">
+				<WeatherBlock title="Weather Type">
 					{WMO[data!.weathercode[0]]}
 				</WeatherBlock>
 			</Row>

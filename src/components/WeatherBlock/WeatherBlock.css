@@ -8,3 +8,11 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+
+.weather-block-content{
+	height: 80%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
