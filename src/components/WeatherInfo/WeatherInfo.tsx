@@ -1,3 +1,5 @@
+// TODO Collapse vertical borders
+
 import React from "react";
 import WeatherBlock from "@components/WeatherBlock/WeatherBlock";
 import Row from "@components/Row/Row";
@@ -71,7 +73,7 @@ function WeatherInfo() {
 					</>
 				</WeatherBlock>
 			</Row>
-			<Row style={{ height: "110px" } as React.CSSProperties}>
+			<Row style={{ height: "110px", marginTop: "2px" } as React.CSSProperties}>
 				<WeatherBlock title="Precipitation">
 					<PrecipitationInfo
 						data={{
